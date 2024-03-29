@@ -46,6 +46,10 @@ async def commands(message: types.Message):
     )
     await message.answer(**response.as_kwargs())
 
+@dp.message(F.text.lower() == "описание бота")
+async def description(message: types.Message):
+    await message.answer("Этот бот предоставляет информацию о погоде.")
+
 async def main() -> None:
     bot = Bot(TOKEN)
     await dp.start_polling(bot)
@@ -55,7 +59,3 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
 
-
-@dp.message(F.text.lower() == "описание бота")
-async def description(message: types.Message):
-    await message.answer("Этот бот предоставляет информацию о погоде.")
